@@ -1,14 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import "tailwindcss/preflight";
+
+@custom-variant dark (&:is(.dark *));
 
 @tailwind utilities;
-
-@layer base {
-  :root[data-theme="dark"] * {
-    color-scheme: dark;
-  }
-}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
