@@ -1,98 +1,98 @@
-# Cursor Rules for newth-ai-embed
+Newth.ai Widgets - Embeddable Component Development Guide
 
-[preferences]
-auto_format = true
-commit_on_every_change = true
-push_dist = false
+Key Principles
 
-[notes]
-# - Hosted on Vercel at widgets.newth.ai
-# - Auto-deploys on every git push
-# - Always auto-format code on save
-# - Commit every change automatically
-# - Never push dist/ to git
-# - SPA routing and static asset handling via vercel.json
-# - Prefer autonomous, multi-step workflows without repeated confirmation
-# - Think a few steps ahead and avoid unnecessary interruptions
-# - ALWAYS commit and push changes after completing tasks
-#
-# Project: Newth.ai Widgets - AI-Powered Embeddable Components
-# Domain: https://widgets.newth.ai
-# Owner: Oliver Newth (newth.ai)
-#
-# Personal Context:
-# - Oliver Newth, 33, lives in San Francisco, married
-# - Product Manager for GenAI at Google
-# - Main website: newth.ai
-# - Interests: travel, organization, DIY projects, gardening
-# - Tech setup: Home Assistant, Unifi network, Synology NAS, Beelink mini PC with Plex
-# - This widget collection reflects personal projects and travel planning needs
-#
-# Architecture & Features:
-# - Clean, refactored codebase with TypeScript
-# - Modular component architecture (WidgetCard, WidgetGrid)
-# - Comprehensive UX testing with Vitest (54 tests)
-# - Embeddable widget platform (React + TypeScript + shadcn/ui)
-# - Individual widgets embeddable without navigation
-# - Responsive design with Tailwind CSS
-# - Accessibility-first with ARIA attributes and keyboard navigation
-# - PWA support with web manifest and favicons
-#
-# Design Principles:
-# - NO HEADERS IN WIDGETS: Widgets should never include page headers, titles, or descriptions
-#   to maintain clean embedding appearance and avoid redundant information when embedded
-# - SINGLE-PURPOSE WIDGETS: Each widget should serve one specific function (map, itinerary, flights, weather)
-#   rather than combining multiple features into one widget for better modularity and reusability
-# - WIDGET CATEGORIZATION: 100% of widgets MUST have a valid category filter to ensure proper organization
-#   and discoverability. Every widget must belong to one of: Vietnam, Productivity, Utilities, Personal
-# - COMPLETE IMPLEMENTATION: Every widget defined in src/constants/widgets.ts MUST have:
-#   1. A corresponding React component in src/pages/
-#   2. A route defined in src/App.tsx
-#   3. Proper TypeScript types and error handling
-#   4. Tests that verify the widget loads and functions correctly
-# - Content should be self-contained and immediately useful without context
-# - Focus on data presentation rather than page structure
-#
-# Project Structure:
-# - src/components/ - Reusable UI components (WidgetCard, WidgetGrid, Layout)
-# - src/components/ui/ - shadcn/ui components (Button, Tabs, Card, Table, Input, Textarea)
-# - src/pages/ - Page components (Home, WeatherVietnam, NotFound)
-# - src/types/ - TypeScript type definitions
-# - src/constants/ - Widget data and configuration
-# - src/utils/ - Utility functions for filtering and management
-# - src/services/ - API services (weatherService)
-# - src/test/ - Test configuration and setup
-# - public/ - Static assets, favicons, and PWA manifest
-#
-# Widget System:
-# - All widgets defined in src/constants/widgets.ts
-# - Easy to add new widgets via constants + pages + routes
-# - Categories: All, Vietnam, Productivity, Utilities, Personal (extensible)
-# - REQUIREMENT: Every widget MUST have a valid category that appears in Home page tabs
-# - REQUIREMENT: Every widget MUST be fully implemented (component + route + tests)
-# - Embeddable URLs: /vietnam/*, /productivity/*, /utilities/*, /personal/*
-# - Main gallery: / with category-based tab navigation
-#
-# Testing:
-# - Comprehensive UX tests covering user interactions
-# - Component tests for WidgetCard and WidgetGrid
-# - Unit tests for utility functions
-# - Accessibility and keyboard navigation tests
-# - Performance and layout stability tests
-# - TypeScript build validation with test:build
-# - Comprehensive testing with test:all (build + lint + tests)
-# - Widget category validation: Ensure all widgets have proper filters
-# - Widget implementation validation: Ensure all widgets are fully implemented
-# - Run with: npm run test, npm run test:run, npm run test:coverage, npm run test:all
-#
-# Development:
-# - Vite config with path alias (@ -> src) and test support
-# - TypeScript strictness with proper type definitions
-# - ESLint configuration for code quality
-# - Auto-formatting and linting on save
-# - Hot module replacement for fast development
-# - NEVER leave widgets partially implemented - always complete the full cycle:
-#   constants → component → route → tests
-# - ALWAYS commit and push changes after completing tasks or major features
-# - Use descriptive commit messages following conventional commits format
-# - Auto-deploy happens via Vercel on every push to main branch 
+- Create embeddable, single-purpose React widgets with TypeScript and Tailwind CSS
+- Focus on clean, modular architecture with strong type safety
+- Ensure widgets are self-contained and immediately useful
+- Maintain comprehensive test coverage using Vitest
+- Follow strict widget implementation requirements
+
+Project Configuration
+
+- Domain: https://widgets.newth.ai
+- Hosting: Vercel with auto-deployments
+- Build System: Vite with TypeScript and path aliases
+- Testing: Vitest with 54 comprehensive tests
+- Styling: Tailwind CSS with shadcn/ui components
+
+Widget Development Rules
+
+1. Widget Structure
+   - No headers or titles in embedded views
+   - Single-purpose functionality only
+   - Must have valid category: Vietnam, Productivity, Utilities, or Personal
+   - Self-contained content without external context
+
+2. Implementation Requirements
+   - Component in src/pages/
+   - Route in App.tsx
+   - TypeScript types and error handling
+   - Comprehensive tests
+   - Category definition in widgets.ts
+
+3. Embeddable URLs
+   - /vietnam/*
+   - /productivity/*
+   - /utilities/*
+   - /personal/*
+
+Project Structure
+
+- src/
+  - components/
+    - ui/ (shadcn components)
+    - Layout.tsx
+    - WidgetCard.tsx
+    - WidgetGrid.tsx
+  - pages/
+  - types/
+  - constants/
+  - utils/
+  - services/
+  - test/
+- public/
+
+Development Workflow
+
+1. Define widget in src/constants/widgets.ts
+2. Create component with TypeScript and tests
+3. Add route to App.tsx
+4. Implement comprehensive tests
+5. Commit and push changes
+6. Verify auto-deployment
+
+Testing Requirements
+
+- Run test suites:
+  ```bash
+  npm run test          # Interactive
+  npm run test:run     # Headless
+  npm run test:coverage
+  npm run test:all     # Full validation
+  ```
+
+- Test coverage must include:
+  - Component rendering
+  - Widget functionality
+  - Accessibility
+  - Keyboard navigation
+  - Performance metrics
+
+Code Quality Standards
+
+- Use TypeScript with strict mode
+- Follow ESLint configuration
+- Implement proper error handling
+- Maintain consistent code formatting
+- Use descriptive commit messages
+
+Accessibility and Performance
+
+- Include ARIA attributes
+- Ensure keyboard navigation
+- Optimize for responsive layouts
+- Follow PWA best practices
+- Monitor performance metrics
+
+Refer to React, TypeScript, Tailwind CSS, shadcn/ui and Phosphor icon documentation for detailed implementation guidance.
