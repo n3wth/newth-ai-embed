@@ -16,7 +16,6 @@ import { WidgetGrid } from '@/components/WidgetGrid'
 import { WIDGETS, WIDGET_CATEGORIES } from '@/constants/widgets'
 import { filterWidgetsByCategory } from '@/utils/widgets'
 import { Marquee } from '@/components/magicui/marquee'
-import { AnimatedGradientText } from '@/components/magicui/animated-gradient-text'
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
