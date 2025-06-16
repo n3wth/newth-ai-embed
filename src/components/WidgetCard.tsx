@@ -192,11 +192,6 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
                   <ExternalLinkIcon className="h-4 w-4" />
                   Open Widget
                 </Button>
-                <Link to={widget.path} className="flex-1">
-                  <Button variant="outline" className="w-full">
-                    View in App
-                  </Button>
-                </Link>
               </div>
             </div>
 
