@@ -127,13 +127,7 @@ export default function Home() {
               <Sparkle className="w-3 h-3 mr-1" />
               Personal Collection
             </Badge>
-            <AnimatedGradientText
-              className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl block"
-              colorFrom="#f59e0b"
-              colorTo="#ef4444"
-            >
-              My Personal Widget Collection
-            </AnimatedGradientText>
+
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               A collection of useful widgets I've built for productivity, utilities, trip planning,
               and personal projects. Feel free to explore and use them for your own needs.
@@ -311,6 +305,14 @@ export default function Home() {
             <p className="text-xs text-muted-foreground">
               Personal widget collection for productivity, utilities, and project planning.
             </p>
+            <a
+              href="https://github.com/n3wth/widgets"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-muted-foreground hover:text-primary transition-colors underline"
+            >
+              View source on GitHub
+            </a>
           </div>
         </div>
       </footer>

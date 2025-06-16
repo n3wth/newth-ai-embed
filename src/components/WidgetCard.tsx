@@ -117,9 +117,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
     window.open(fullUrl, '_blank')
   }
 
-  const handleLinkClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
-  }
+
 
   // Create lazy component for the widget
   const WidgetComponent = getWidgetComponent(widget.path)
@@ -172,23 +170,15 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
               </Badge>
             )}
           </div>
-          <div onClick={handleLinkClick}>
-            <Link
-              to={widget.path}
-              className="text-sm text-primary hover:underline"
-              data-testid={`widget-link-${widget.id}`}
-            >
-              View in app →
-            </Link>
-          </div>
+
         </CardContent>
       </Card>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-4xl h-auto flex flex-col">
-          <DialogHeader className="flex-shrink-0">
-            <DialogTitle className="flex items-center gap-2">{widget.title}</DialogTitle>
-            <DialogDescription>{widget.description}</DialogDescription>
+        <DialogContent className="max-w-4xl h-auto flex flex-col [&>button]:h-8 [&>button]:w-8 [&>button>svg]:h-5 [&>button>svg]:w-5">
+          <DialogHeader className="flex-shrink-0 pb-6 pt-4 px-4">
+            <DialogTitle className="flex items-center gap-2 text-xl">{widget.title}</DialogTitle>
+            <DialogDescription className="text-base pt-1">{widget.description}</DialogDescription>
           </DialogHeader>
 
           <div className="flex-1 space-y-4">
