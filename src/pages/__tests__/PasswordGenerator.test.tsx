@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import PasswordGenerator from '../PasswordGenerator';
 
@@ -26,12 +26,11 @@ describe('PasswordGenerator Widget', () => {
   });
 
   it('updates length when slider changes', async () => {
-    const user = userEvent.setup();
     renderWidget();
 
     const slider = screen.getByTestId('length-slider') as HTMLInputElement;
-    await user.type(slider, '{end}{arrowleft}');
-    // Move slider; direct slider event may not work; simple check input exists.
-    expect(slider).toBeInTheDocument();
+    expect(slider.value).toBe('12');
+    fireEvent.change(slider, { target: { value: 20 } });
+    expect(slider.value).toBe('20');
   });
 });

@@ -155,7 +155,7 @@ export default function UnitConverter() {
 
           {result && (
             <div data-testid="result" className="text-xl font-semibold">
-              {value} {categories[category].units[fromUnit].label} = {result} {categories[category].units[toUnit].label}
+              {value} {(categories[category] as any).units[fromUnit].label} = {result} {(categories[category] as any).units[toUnit].label}
             </div>
           )}
         </CardContent>
