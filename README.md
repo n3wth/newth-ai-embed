@@ -2,7 +2,7 @@
 
 A collection of personal widgets I've built for documentation, trip planning, and various projects. Currently featuring weather widgets for my Vietnam trip planning.
 
-🌐 **Live Site**: [widgets.newth.ai](https://widgets.newth.ai)
+**Live Site**: [widgets.newth.ai](https://widgets.newth.ai)
 
 ## About
 
