@@ -11,6 +11,8 @@ import HabitTracker from './pages/HabitTracker';
 import WorldClock from './pages/WorldClock';
 import ColorPalette from './pages/ColorPalette';
 import QRCodeGenerator from './pages/QRCodeGenerator';
+import PasswordGenerator from './pages/PasswordGenerator';
+import UnitConverter from './pages/UnitConverter';
 import SanFranciscoWeather from './pages/SanFranciscoWeather';
 import ReadingList from './pages/ReadingList';
 import WorkoutLog from './pages/WorkoutLog';
@@ -36,6 +38,8 @@ function App() {
         <Route path="/utilities/world-clock" element={<WorldClock />} />
         <Route path="/utilities/colors" element={<ColorPalette />} />
         <Route path="/utilities/qr-code" element={<QRCodeGenerator />} />
+        <Route path="/utilities/password-generator" element={<PasswordGenerator />} />
+        <Route path="/utilities/unit-converter" element={<UnitConverter />} />
         <Route path="/personal/sf-weather" element={<SanFranciscoWeather />} />
         <Route path="/personal/reading" element={<ReadingList />} />
         <Route path="/personal/workout" element={<WorkoutLog />} />

@@ -118,6 +118,22 @@ export const WIDGETS: Widget[] = [
     category: WIDGET_CATEGORIES.UTILITIES,
     tags: ['qr', 'generator', 'code', 'sharing']
   },
+  {
+    id: 'password-generator',
+    title: 'Password Generator',
+    description: 'Generate secure random passwords with customizable length and character sets',
+    path: '/utilities/password-generator',
+    category: WIDGET_CATEGORIES.UTILITIES,
+    tags: ['password', 'security', 'generator', 'utilities']
+  },
+  {
+    id: 'unit-converter',
+    title: 'Unit Converter',
+    description: 'Convert between common units of length, weight, and temperature',
+    path: '/utilities/unit-converter',
+    category: WIDGET_CATEGORIES.UTILITIES,
+    tags: ['converter', 'units', 'utilities']
+  },
 
   // Personal Widgets
   {
