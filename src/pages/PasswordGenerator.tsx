@@ -65,7 +65,7 @@ export default function PasswordGenerator() {
     if (!password) return;
     try {
       await navigator.clipboard.writeText(password);
-    } catch (_) {
+    } catch {
       // ignore copy errors
     }
   };
