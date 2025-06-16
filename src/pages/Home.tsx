@@ -124,7 +124,7 @@ export default function Home() {
               Personal Collection
             </Badge>
 
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="body-lg text-muted-foreground max-w-2xl mx-auto">
               A collection of useful widgets I've built for productivity, utilities, trip planning
               and personal projects. Feel free to explore and use them for your own needs!
             </p>
@@ -199,8 +199,8 @@ export default function Home() {
 
             <TabsContent value="all" data-testid="tab-content-all" className="space-y-6">
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">All Personal Widgets</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="heading-sm">All Personal Widgets</h3>
+                <p className="body-sm text-muted-foreground">
                   Everything I've built for various personal projects, productivity, and
                   documentation
                 </p>
@@ -210,8 +210,8 @@ export default function Home() {
 
             <TabsContent value="vietnam" data-testid="tab-content-vietnam" className="space-y-6">
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Vietnam Trip Planning</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="heading-sm">Vietnam Trip Planning</h3>
+                <p className="body-sm text-muted-foreground">
                   Widgets I built to help plan my Vietnam trip - weather, flights, maps, and
                   itinerary
                 </p>
@@ -225,8 +225,8 @@ export default function Home() {
               className="space-y-6"
             >
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Productivity Tools</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="heading-sm">Productivity Tools</h3>
+                <p className="body-sm text-muted-foreground">
                   Focus timers, habit trackers, and note-taking tools to boost productivity
                 </p>
               </div>
@@ -239,8 +239,8 @@ export default function Home() {
               className="space-y-6"
             >
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Utility Widgets</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="heading-sm">Utility Widgets</h3>
+                <p className="body-sm text-muted-foreground">
                   Handy tools for design, time zones, and everyday tasks
                 </p>
               </div>
@@ -249,8 +249,8 @@ export default function Home() {
 
             <TabsContent value="personal" data-testid="tab-content-personal" className="space-y-6">
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Personal Widgets</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="heading-sm">Personal Widgets</h3>
+                <p className="body-sm text-muted-foreground">
                   Local weather, reading lists, and personal tracking tools
                 </p>
               </div>
@@ -264,15 +264,15 @@ export default function Home() {
       <footer className="border-t bg-muted/50">
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 body-sm text-muted-foreground">
               <span>Built with</span>
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="body-xs">
                 React
               </Badge>
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="body-xs">
                 TypeScript
               </Badge>
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="body-xs">
                 shadcn/ui
               </Badge>
             </div>
@@ -280,7 +280,7 @@ export default function Home() {
               href="https://github.com/n3wth/widgets"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-primary transition-colors underline"
+              className="body-xs text-muted-foreground hover:text-primary transition-colors underline"
             >
               View source on GitHub
             </a>

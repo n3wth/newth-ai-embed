@@ -141,14 +141,14 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
             <div className="space-y-1 flex-1">
               <CardTitle
                 className={cn(
-                  'text-lg leading-tight group-hover:text-primary transition-colors',
-                  isCompact && 'text-base'
+                  'heading-xs group-hover:text-primary transition-colors',
+                  isCompact && 'heading-xs'
                 )}
               >
                 {widget.title}
               </CardTitle>
               <CardDescription
-                className={cn('text-sm text-muted-foreground line-clamp-2', isCompact && 'text-xs')}
+                className={cn('body-sm text-muted-foreground line-clamp-2', isCompact && 'body-xs')}
               >
                 {widget.description}
               </CardDescription>
@@ -159,12 +159,12 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
         <CardContent className="pt-0">
           <div className="flex flex-wrap gap-1 mb-3">
             {widget.tags?.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs">
+              <Badge key={tag} variant="secondary" className="body-xs">
                 {tag}
               </Badge>
             ))}
             {widget.tags && widget.tags.length > 3 && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="body-xs">
                 +{widget.tags.length - 3}
               </Badge>
             )}
@@ -176,8 +176,8 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="max-w-4xl h-auto flex flex-col [&>button]:h-8 [&>button]:w-8 [&>button>svg]:h-5 [&>button>svg]:w-5">
           <DialogHeader className="flex-shrink-0 pb-6 pt-4 px-4">
-            <DialogTitle className="flex items-center gap-2 text-xl">{widget.title}</DialogTitle>
-            <DialogDescription className="text-base pt-1">{widget.description}</DialogDescription>
+            <DialogTitle className="flex items-center gap-2 heading-md">{widget.title}</DialogTitle>
+            <DialogDescription className="body-md text-muted-foreground pt-1">{widget.description}</DialogDescription>
           </DialogHeader>
 
           <div className="flex-1 space-y-4">
@@ -185,14 +185,14 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
             <div className="space-y-3 flex-shrink-0 bg-muted/30 p-4 rounded-lg">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">Category:</span>
-                  <Badge variant="outline">{widget.category}</Badge>
+                  <span className="body-sm text-medium">Category:</span>
+                  <Badge variant="outline" className="body-xs">{widget.category}</Badge>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-sm font-medium">Tags:</span>
+                  <span className="body-sm text-medium">Tags:</span>
                   <div className="flex flex-wrap gap-1">
                     {widget.tags?.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
+                      <Badge key={tag} variant="secondary" className="body-xs">
                         {tag}
                       </Badge>
                     ))}
@@ -202,12 +202,11 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
 
               {/* URL Section */}
               <div className="space-y-2">
-                <label className="text-sm font-medium">Embed URL:</label>
                 <div className="flex gap-2">
                   <Input
                     value={fullUrl}
                     readOnly
-                    className="font-mono text-sm"
+                    className="font-mono body-sm"
                     onClick={(e) => e.currentTarget.select()}
                   />
                   <Button
@@ -223,7 +222,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
                     )}
                   </Button>
                 </div>
-                {copied && <p className="text-sm text-green-600">URL copied to clipboard!</p>}
+                {copied && <p className="body-sm text-green-600">URL copied to clipboard!</p>}
               </div>
 
               {/* Action Buttons */}
