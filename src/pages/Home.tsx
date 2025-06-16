@@ -276,9 +276,6 @@ export default function Home() {
                 shadcn/ui
               </Badge>
             </div>
-            <p className="text-xs text-muted-foreground">
-              Personal widget collection for productivity, utilities, and project planning.
-            </p>
             <a
               href="https://github.com/n3wth/widgets"
               target="_blank"
