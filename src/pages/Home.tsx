@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import {
   Lego,
   Sparkle,
-  Code,
-  Palette,
   MapPin,
   Lightning,
   Wrench,
@@ -131,23 +128,6 @@ export default function Home() {
               A collection of useful widgets I've built for productivity, utilities, trip planning,
               and personal projects. Feel free to explore and use them for your own needs.
             </p>
-          </div>
-
-          <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Code className="w-4 h-4" />
-              <span>TypeScript</span>
-            </div>
-            <Separator orientation="vertical" className="h-4" />
-            <div className="flex items-center gap-2">
-              <Palette className="w-4 h-4" />
-              <span>Tailwind CSS</span>
-            </div>
-            <Separator orientation="vertical" className="h-4" />
-            <div className="flex items-center gap-2">
-              <Lego className="w-4 h-4" />
-              <span>shadcn/ui</span>
-            </div>
           </div>
         </div>
       </section>
