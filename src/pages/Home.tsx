@@ -71,7 +71,7 @@ export default function Home() {
                   className="font-bold tracking-tight transition-all duration-200"
                   style={{ fontSize: `${titleSize}rem` }}
                 >
-                  Newth.ai Widgets
+                  Widgets by <a href="https://newth.ai" className="text-primary hover:underline dark:text-primary">Newth.ai</a>
                 </h1>
               </div>
             </div>
@@ -125,8 +125,8 @@ export default function Home() {
             </Badge>
 
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              A collection of useful widgets I've built for productivity, utilities, trip planning,
-              and personal projects. Feel free to explore and use them for your own needs.
+              A collection of useful widgets I've built for productivity, utilities, trip planning
+              and personal projects. Feel free to explore and use them for your own needs!
             </p>
           </div>
         </div>
@@ -194,12 +194,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground ml-4">
-                <span>Theme:</span>
-                <Badge variant="outline" className="font-mono">
-                  Default
-                </Badge>
-              </div>
+
             </div>
 
             <TabsContent value="all" data-testid="tab-content-all" className="space-y-6">
