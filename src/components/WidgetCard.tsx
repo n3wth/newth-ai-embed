@@ -6,6 +6,20 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog'
 import { ExternalLinkIcon, CopyIcon, CheckIcon, LoaderIcon } from 'lucide-react'
+import {
+  CloudRain,
+  Airplane,
+  MapPin,
+  Calendar,
+  Timer,
+  Note,
+  CheckSquare,
+  Clock,
+  Palette,
+  QrCode,
+  Book,
+  Barbell,
+} from '@phosphor-icons/react'
 import type { Widget } from '@/types/widget'
 import { BASE_URL } from '@/constants/config'
 import { cn } from '@/lib/utils'
@@ -43,6 +57,40 @@ const getWidgetComponent = (path: string) => {
   return componentMap[path]
 }
 
+// Function to get the appropriate Phosphor icon for each widget
+const getWidgetIcon = (widgetId: string) => {
+  const iconMap: Record<string, { 
+    icon: React.ComponentType<{ className?: string }>,
+    colorClass: string 
+  }> = {
+    // Vietnam widgets
+    'vietnam-weather-overview': { icon: CloudRain, colorClass: 'text-muted-foreground' },
+    'vietnam-flights': { icon: Airplane, colorClass: 'text-muted-foreground' },
+    'vietnam-map': { icon: MapPin, colorClass: 'text-muted-foreground' },
+    'vietnam-itinerary': { icon: Calendar, colorClass: 'text-muted-foreground' },
+    'hanoi-weather': { icon: CloudRain, colorClass: 'text-muted-foreground' },
+    'hochiminh-weather': { icon: CloudRain, colorClass: 'text-muted-foreground' },
+    'halongbay-weather': { icon: CloudRain, colorClass: 'text-muted-foreground' },
+    
+    // Productivity widgets
+    'pomodoro-timer': { icon: Timer, colorClass: 'text-muted-foreground' },
+    'quick-notes': { icon: Note, colorClass: 'text-muted-foreground' },
+    'habit-tracker': { icon: CheckSquare, colorClass: 'text-muted-foreground' },
+    
+    // Utility widgets
+    'world-clock': { icon: Clock, colorClass: 'text-muted-foreground' },
+    'color-palette': { icon: Palette, colorClass: 'text-muted-foreground' },
+    'qr-generator': { icon: QrCode, colorClass: 'text-muted-foreground' },
+    
+    // Personal widgets
+    'sf-weather': { icon: CloudRain, colorClass: 'text-muted-foreground' },
+    'reading-list': { icon: Book, colorClass: 'text-muted-foreground' },
+    'workout-log': { icon: Barbell, colorClass: 'text-muted-foreground' },
+  }
+
+  return iconMap[widgetId] || { icon: ExternalLinkIcon, colorClass: 'text-muted-foreground' }
+}
+
 export const WidgetCard = ({ widget, className = '', variant = 'default' }: WidgetCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -78,6 +126,9 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
     ? lazy(getWidgetComponent(widget.path)!)
     : null
 
+  // Get the appropriate icon and color for this widget
+  const { icon: IconComponent, colorClass } = getWidgetIcon(widget.id)
+
   return (
     <>
       <Card
@@ -105,7 +156,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
                 {widget.description}
               </CardDescription>
             </div>
-            <ExternalLinkIcon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 ml-2" />
+            <IconComponent className={`h-6 w-6 ${colorClass} group-hover:scale-110 transition-all duration-200 flex-shrink-0 ml-2`} />
           </div>
         </CardHeader>
         <CardContent className="pt-0">
