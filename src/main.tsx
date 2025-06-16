@@ -15,5 +15,5 @@ ReactDOM.createRoot(rootElement!).render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

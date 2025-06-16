@@ -1,21 +1,25 @@
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './pages/Home';
-import WeatherVietnam, { HanoiWidget, HoChiMinhWidget, HaLongBayWidget } from './pages/WeatherVietnam';
-import VietnamFlights from './pages/VietnamFlights';
-import VietnamMap from './pages/VietnamMap';
-import VietnamItinerary from './pages/VietnamItinerary';
-import PomodoroTimer from './pages/PomodoroTimer';
-import QuickNotes from './pages/QuickNotes';
-import HabitTracker from './pages/HabitTracker';
-import WorldClock from './pages/WorldClock';
-import ColorPalette from './pages/ColorPalette';
-import QRCodeGenerator from './pages/QRCodeGenerator';
-import SanFranciscoWeather from './pages/SanFranciscoWeather';
-import ReadingList from './pages/ReadingList';
-import WorkoutLog from './pages/WorkoutLog';
-import NotFound from './pages/NotFound';
-import VietnamDashboard from './pages/VietnamDashboard';
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import WeatherVietnam, {
+  HanoiWidget,
+  HoChiMinhWidget,
+  HaLongBayWidget,
+} from './pages/WeatherVietnam'
+import VietnamFlights from './pages/VietnamFlights'
+import VietnamMap from './pages/VietnamMap'
+import VietnamItinerary from './pages/VietnamItinerary'
+import PomodoroTimer from './pages/PomodoroTimer'
+import QuickNotes from './pages/QuickNotes'
+import HabitTracker from './pages/HabitTracker'
+import WorldClock from './pages/WorldClock'
+import ColorPalette from './pages/ColorPalette'
+import QRCodeGenerator from './pages/QRCodeGenerator'
+import SanFranciscoWeather from './pages/SanFranciscoWeather'
+import ReadingList from './pages/ReadingList'
+import WorkoutLog from './pages/WorkoutLog'
+import NotFound from './pages/NotFound'
+import VietnamDashboard from './pages/VietnamDashboard'
 
 function App() {
   return (
@@ -42,7 +46,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
-  );
+  )
 }
 
-export default App;
+export default App

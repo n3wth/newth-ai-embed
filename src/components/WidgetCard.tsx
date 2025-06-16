@@ -1,19 +1,19 @@
-import React, { useState, Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
-import { ExternalLinkIcon, CopyIcon, CheckIcon, LoaderIcon } from 'lucide-react';
-import type { Widget } from '@/types/widget';
-import { BASE_URL } from '@/constants/config';
-import { cn } from '@/lib/utils';
+import React, { useState, Suspense, lazy } from 'react'
+import { Link } from 'react-router-dom'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
+import { Badge } from './ui/badge'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog'
+import { ExternalLinkIcon, CopyIcon, CheckIcon, LoaderIcon } from 'lucide-react'
+import type { Widget } from '@/types/widget'
+import { BASE_URL } from '@/constants/config'
+import { cn } from '@/lib/utils'
 
 interface WidgetCardProps {
-  widget: Widget;
-  className?: string;
-  variant?: 'default' | 'compact';
+  widget: Widget
+  className?: string
+  variant?: 'default' | 'compact'
 }
 
 // Dynamic imports for widget components
@@ -23,9 +23,12 @@ const getWidgetComponent = (path: string) => {
     '/vietnam/flights': () => import('../pages/VietnamFlights'),
     '/vietnam/map': () => import('../pages/VietnamMap'),
     '/vietnam/itinerary': () => import('../pages/VietnamItinerary'),
-    '/vietnam/hanoi': () => import('../pages/WeatherVietnam').then(module => ({ default: module.HanoiWidget })),
-    '/vietnam/hochiminh': () => import('../pages/WeatherVietnam').then(module => ({ default: module.HoChiMinhWidget })),
-    '/vietnam/halongbay': () => import('../pages/WeatherVietnam').then(module => ({ default: module.HaLongBayWidget })),
+    '/vietnam/hanoi': () =>
+      import('../pages/WeatherVietnam').then((module) => ({ default: module.HanoiWidget })),
+    '/vietnam/hochiminh': () =>
+      import('../pages/WeatherVietnam').then((module) => ({ default: module.HoChiMinhWidget })),
+    '/vietnam/halongbay': () =>
+      import('../pages/WeatherVietnam').then((module) => ({ default: module.HaLongBayWidget })),
     '/productivity/pomodoro': () => import('../pages/PomodoroTimer'),
     '/productivity/notes': () => import('../pages/QuickNotes'),
     '/productivity/habits': () => import('../pages/HabitTracker'),
@@ -35,69 +38,70 @@ const getWidgetComponent = (path: string) => {
     '/personal/sf-weather': () => import('../pages/SanFranciscoWeather'),
     '/personal/reading': () => import('../pages/ReadingList'),
     '/personal/workout': () => import('../pages/WorkoutLog'),
-  };
+  }
 
-  return componentMap[path];
-};
+  return componentMap[path]
+}
 
 export const WidgetCard = ({ widget, className = '', variant = 'default' }: WidgetCardProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  
-  const isCompact = variant === 'compact';
-  const fullUrl = `${BASE_URL}${widget.path}`;
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const isCompact = variant === 'compact'
+  const fullUrl = `${BASE_URL}${widget.path}`
 
   const handleCardClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsModalOpen(true);
-  };
+    e.preventDefault()
+    setIsModalOpen(true)
+  }
 
   const handleCopyUrl = async () => {
     try {
-      await navigator.clipboard.writeText(fullUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await navigator.clipboard.writeText(fullUrl)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     } catch (error) {
-      console.error('Failed to copy URL:', error);
+      console.error('Failed to copy URL:', error)
     }
-  };
+  }
 
   const handleVisitWidget = () => {
-    window.open(fullUrl, '_blank');
-  };
+    window.open(fullUrl, '_blank')
+  }
 
   const handleLinkClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
+    e.stopPropagation()
+  }
 
   // Create lazy component for the widget
-  const WidgetComponent = getWidgetComponent(widget.path) 
+  const WidgetComponent = getWidgetComponent(widget.path)
     ? lazy(getWidgetComponent(widget.path)!)
-    : null;
+    : null
 
   return (
     <>
-      <Card 
+      <Card
         className={cn(
-          "group cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-[1.02] border-border/50 hover:border-border",
+          'group cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-[1.02] border-border/50 hover:border-border',
           className
         )}
         onClick={handleCardClick}
         data-testid={`widget-card-${widget.id}`}
       >
-        <CardHeader className={cn("pb-3", isCompact && "pb-2")}>
+        <CardHeader className={cn('pb-3', isCompact && 'pb-2')}>
           <div className="flex items-start justify-between">
             <div className="space-y-1 flex-1">
-              <CardTitle className={cn(
-                "text-lg leading-tight group-hover:text-primary transition-colors",
-                isCompact && "text-base"
-              )}>
+              <CardTitle
+                className={cn(
+                  'text-lg leading-tight group-hover:text-primary transition-colors',
+                  isCompact && 'text-base'
+                )}
+              >
                 {widget.title}
               </CardTitle>
-              <CardDescription className={cn(
-                "text-sm text-muted-foreground line-clamp-2",
-                isCompact && "text-xs"
-              )}>
+              <CardDescription
+                className={cn('text-sm text-muted-foreground line-clamp-2', isCompact && 'text-xs')}
+              >
                 {widget.description}
               </CardDescription>
             </div>
@@ -118,7 +122,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
             )}
           </div>
           <div onClick={handleLinkClick}>
-            <Link 
+            <Link
               to={widget.path}
               className="text-sm text-primary hover:underline"
               data-testid={`widget-link-${widget.id}`}
@@ -130,16 +134,12 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
       </Card>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-4xl h-auto overflow-hidden flex flex-col">
+        <DialogContent className="max-w-4xl h-auto flex flex-col">
           <DialogHeader className="flex-shrink-0">
-            <DialogTitle className="flex items-center gap-2">
-              {widget.title}
-            </DialogTitle>
-            <DialogDescription>
-              {widget.description}
-            </DialogDescription>
+            <DialogTitle className="flex items-center gap-2">{widget.title}</DialogTitle>
+            <DialogDescription>{widget.description}</DialogDescription>
           </DialogHeader>
-          
+
           <div className="flex-1 space-y-4">
             {/* Embedding Info */}
             <div className="space-y-3 flex-shrink-0 bg-muted/30 p-4 rounded-lg">
@@ -183,9 +183,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
                     )}
                   </Button>
                 </div>
-                {copied && (
-                  <p className="text-sm text-green-600">URL copied to clipboard!</p>
-                )}
+                {copied && <p className="text-sm text-green-600">URL copied to clipboard!</p>}
               </div>
 
               {/* Action Buttons */}
@@ -204,7 +202,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
 
             {/* Widget Content */}
             {WidgetComponent ? (
-              <Suspense 
+              <Suspense
                 fallback={
                   <div className="flex items-center justify-center p-8 border rounded-lg bg-background">
                     <LoaderIcon className="h-6 w-6 animate-spin text-muted-foreground" />
@@ -227,7 +225,7 @@ export const WidgetCard = ({ widget, className = '', variant = 'default' }: Widg
         </DialogContent>
       </Dialog>
     </>
-  );
-};
+  )
+}
 
-export default WidgetCard; 
+export default WidgetCard

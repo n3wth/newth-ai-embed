@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card'
 
 export default function VietnamMap() {
   return (
@@ -20,5 +20,5 @@ export default function VietnamMap() {
         </Card>
       </div>
     </div>
-  );
-} 
+  )
+}

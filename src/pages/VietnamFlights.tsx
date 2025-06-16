@@ -1,29 +1,29 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Plane, Clock, MapPin, Calendar } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import { Plane, Clock, MapPin, Calendar } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface FlightDetails {
-  direction: 'outbound' | 'return';
-  airline: string;
-  flightNumber: string;
+  direction: 'outbound' | 'return'
+  airline: string
+  flightNumber: string
   departure: {
-    date: string;
-    time: string;
-    airport: string;
-    city: string;
-  };
+    date: string
+    time: string
+    airport: string
+    city: string
+  }
   arrival: {
-    date: string;
-    time: string;
-    airport: string;
-    city: string;
-  };
-  duration: string;
-  aircraft: string;
-  class: string;
-  cost?: number;
+    date: string
+    time: string
+    airport: string
+    city: string
+  }
+  duration: string
+  aircraft: string
+  class: string
+  cost?: number
 }
 
 const FLIGHT_DATA: FlightDetails[] = [
@@ -35,17 +35,17 @@ const FLIGHT_DATA: FlightDetails[] = [
       date: 'Thursday, June 26, 2025',
       time: '10:50 PM',
       airport: 'SFO',
-      city: 'San Francisco'
+      city: 'San Francisco',
     },
     arrival: {
       date: 'Saturday, June 28, 2025',
       time: '4:30 AM',
       airport: 'SGN',
-      city: 'Ho Chi Minh City'
+      city: 'Ho Chi Minh City',
     },
     duration: '15 hours 40 minutes',
     aircraft: 'Boeing 787',
-    class: 'Economy'
+    class: 'Economy',
   },
   {
     direction: 'return',
@@ -55,18 +55,18 @@ const FLIGHT_DATA: FlightDetails[] = [
       date: 'Sunday, July 6, 2025',
       time: '6:45 PM',
       airport: 'SGN',
-      city: 'Ho Chi Minh City'
+      city: 'Ho Chi Minh City',
     },
     arrival: {
       date: 'Sunday, July 6, 2025',
       time: '6:40 PM',
       airport: 'SFO',
-      city: 'San Francisco'
+      city: 'San Francisco',
     },
     duration: '13 hours 55 minutes',
     aircraft: 'Boeing 787',
     class: 'Economy',
-    cost: 300
+    cost: 300,
   },
   {
     direction: 'outbound',
@@ -76,41 +76,43 @@ const FLIGHT_DATA: FlightDetails[] = [
       date: 'Wednesday, July 2, 2025',
       time: '8:00 AM',
       airport: 'HAN',
-      city: 'Hanoi'
+      city: 'Hanoi',
     },
     arrival: {
       date: 'Wednesday, July 2, 2025',
       time: '10:10 AM',
       airport: 'SGN',
-      city: 'Ho Chi Minh City'
+      city: 'Ho Chi Minh City',
     },
     duration: '2 hours 10 minutes',
     aircraft: 'Airbus A321',
     class: 'Economy',
-    cost: 381.83
-  }
-];
+    cost: 381.83,
+  },
+]
 
 interface FlightCardProps {
-  flight: FlightDetails;
-  className?: string;
+  flight: FlightDetails
+  className?: string
 }
 
 function FlightCard({ flight, className }: FlightCardProps) {
-  const isOutbound = flight.direction === 'outbound';
-  
+  const isOutbound = flight.direction === 'outbound'
+
   return (
-    <Card className={cn("overflow-hidden", className)}>
+    <Card className={cn('overflow-hidden', className)}>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-lg">
-            <Plane className={cn(
-              "h-5 w-5 transition-transform",
-              isOutbound ? "text-green-600" : "text-blue-600 rotate-180"
-            )} />
+            <Plane
+              className={cn(
+                'h-5 w-5 transition-transform',
+                isOutbound ? 'text-green-600' : 'text-blue-600 rotate-180'
+              )}
+            />
             {isOutbound ? 'Outbound Flight' : 'Return Flight'}
           </CardTitle>
-          <Badge variant={isOutbound ? "default" : "secondary"} className="text-xs">
+          <Badge variant={isOutbound ? 'default' : 'secondary'} className="text-xs">
             {flight.flightNumber}
           </Badge>
         </div>
@@ -126,13 +128,13 @@ function FlightCard({ flight, className }: FlightCardProps) {
             </div>
             <p className="text-xs text-muted-foreground">{flight.departure.city}</p>
           </div>
-          
+
           <div className="flex items-center gap-2 px-4">
             <div className="h-px bg-border flex-1"></div>
             <Plane className="h-4 w-4 text-muted-foreground" />
             <div className="h-px bg-border flex-1"></div>
           </div>
-          
+
           <div className="text-center flex-1">
             <div className="flex items-center justify-center gap-1 mb-1">
               <MapPin className="h-3 w-3 text-muted-foreground" />
@@ -154,7 +156,7 @@ function FlightCard({ flight, className }: FlightCardProps) {
             <p className="text-sm font-semibold">{flight.departure.time}</p>
             <p className="text-xs text-muted-foreground">{flight.departure.date}</p>
           </div>
-          
+
           <div className="space-y-1">
             <div className="flex items-center gap-1">
               <Calendar className="h-3 w-3 text-muted-foreground" />
@@ -176,7 +178,7 @@ function FlightCard({ flight, className }: FlightCardProps) {
             </div>
             <p className="text-muted-foreground">{flight.duration}</p>
           </div>
-          
+
           <div className="space-y-2">
             <div className="flex items-center gap-1">
               <Plane className="h-3 w-3 text-muted-foreground" />
@@ -202,7 +204,7 @@ function FlightCard({ flight, className }: FlightCardProps) {
         )}
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export default function VietnamFlights() {
@@ -211,13 +213,10 @@ export default function VietnamFlights() {
       <div className="container mx-auto p-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {FLIGHT_DATA.map((flight) => (
-            <FlightCard 
-              key={flight.direction} 
-              flight={flight}
-            />
+            <FlightCard key={flight.direction} flight={flight} />
           ))}
         </div>
       </div>
     </div>
-  );
-} 
+  )
+}

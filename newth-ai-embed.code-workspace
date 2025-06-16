@@ -1,0 +1,47 @@
+{
+  "folders": [
+    {
+      "name": "Root",
+      "path": ".",
+    },
+    {
+      "name": "Source",
+      "path": "./src",
+    },
+    {
+      "name": "Components",
+      "path": "./src/components",
+    },
+    {
+      "name": "Pages",
+      "path": "./src/pages",
+    },
+    {
+      "name": "Tests",
+      "path": "./src/test",
+    },
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "typescript.validate.enable": true,
+    "eslint.validate": ["typescript", "typescriptreact"],
+    "files.eol": "\n",
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "*.ts": "${capture}.js",
+      "*.tsx": "${capture}.js",
+      "package.json": "package-lock.json,npm-shrinkwrap.json,yarn.lock,pnpm-lock.yaml",
+      "tsconfig.json": "tsconfig.*.json",
+      "vite.config.ts": "vitest.config.ts",
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-typescript-next",
+      "dbaeumer.vscode-eslint",
+    ],
+  },
+}

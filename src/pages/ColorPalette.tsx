@@ -1,55 +1,81 @@
-import { useState, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Palette, RefreshCw, Copy, Check } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useState, useCallback } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Palette, RefreshCw, Copy, Check } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface Color {
-  hex: string;
-  name: string;
-  copied: boolean;
+  hex: string
+  name: string
+  copied: boolean
 }
 
 const COLOR_NAMES = [
-  'Crimson', 'Coral', 'Amber', 'Emerald', 'Teal', 'Azure', 'Indigo', 'Violet',
-  'Rose', 'Orange', 'Lime', 'Cyan', 'Blue', 'Purple', 'Pink', 'Yellow',
-  'Mint', 'Lavender', 'Peach', 'Sage', 'Slate', 'Stone', 'Zinc', 'Gray'
-];
+  'Crimson',
+  'Coral',
+  'Amber',
+  'Emerald',
+  'Teal',
+  'Azure',
+  'Indigo',
+  'Violet',
+  'Rose',
+  'Orange',
+  'Lime',
+  'Cyan',
+  'Blue',
+  'Purple',
+  'Pink',
+  'Yellow',
+  'Mint',
+  'Lavender',
+  'Peach',
+  'Sage',
+  'Slate',
+  'Stone',
+  'Zinc',
+  'Gray',
+]
 
 function generateRandomColor(): string {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+  return (
+    '#' +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')
+  )
 }
 
 function getColorName(): string {
-  return COLOR_NAMES[Math.floor(Math.random() * COLOR_NAMES.length)];
+  return COLOR_NAMES[Math.floor(Math.random() * COLOR_NAMES.length)]!
 }
 
 function generatePalette(count: number = 5): Color[] {
   return Array.from({ length: count }, () => ({
     hex: generateRandomColor(),
     name: getColorName(),
-    copied: false
-  }));
+    copied: false,
+  }))
 }
 
 function getContrastColor(hexColor: string): string {
-  const r = parseInt(hexColor.slice(1, 3), 16);
-  const g = parseInt(hexColor.slice(3, 5), 16);
-  const b = parseInt(hexColor.slice(5, 7), 16);
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-  return brightness > 128 ? '#000000' : '#ffffff';
+  const r = parseInt(hexColor.slice(1, 3), 16)
+  const g = parseInt(hexColor.slice(3, 5), 16)
+  const b = parseInt(hexColor.slice(5, 7), 16)
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000
+  return brightness > 128 ? '#000000' : '#ffffff'
 }
 
 function ColorCard({ color, onCopy }: { color: Color; onCopy: (hex: string) => void }) {
-  const textColor = getContrastColor(color.hex);
-  
+  const textColor = getContrastColor(color.hex)
+
   return (
-    <Card 
+    <Card
       className="overflow-hidden cursor-pointer transition-transform hover:scale-105"
       onClick={() => onCopy(color.hex)}
     >
-      <div 
+      <div
         className="h-32 flex items-center justify-center relative group"
         style={{ backgroundColor: color.hex }}
       >
@@ -64,7 +90,7 @@ function ColorCard({ color, onCopy }: { color: Color; onCopy: (hex: string) => v
           </div>
         </div>
       </div>
-      
+
       <CardContent className="p-3 space-y-2">
         <div className="text-center">
           <h3 className="font-medium text-sm">{color.name}</h3>
@@ -72,45 +98,45 @@ function ColorCard({ color, onCopy }: { color: Color; onCopy: (hex: string) => v
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export default function ColorPalette() {
-  const [palette, setPalette] = useState<Color[]>(() => generatePalette());
-  const [paletteSize, setPaletteSize] = useState(5);
+  const [palette, setPalette] = useState<Color[]>(() => generatePalette())
+  const [paletteSize, setPaletteSize] = useState(5)
 
   const regeneratePalette = useCallback(() => {
-    setPalette(generatePalette(paletteSize));
-  }, [paletteSize]);
+    setPalette(generatePalette(paletteSize))
+  }, [paletteSize])
 
   const copyToClipboard = async (hex: string) => {
     try {
-      await navigator.clipboard.writeText(hex);
-      setPalette(prev => prev.map(color => 
-        color.hex === hex 
-          ? { ...color, copied: true }
-          : { ...color, copied: false }
-      ));
-      
+      await navigator.clipboard.writeText(hex)
+      setPalette((prev) =>
+        prev.map((color) =>
+          color.hex === hex ? { ...color, copied: true } : { ...color, copied: false }
+        )
+      )
+
       // Reset copied state after 2 seconds
       setTimeout(() => {
-        setPalette(prev => prev.map(color => ({ ...color, copied: false })));
-      }, 2000);
+        setPalette((prev) => prev.map((color) => ({ ...color, copied: false })))
+      }, 2000)
     } catch {
       // Fallback for browsers that don't support clipboard API
-      const textArea = document.createElement('textarea');
-      textArea.value = hex;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
+      const textArea = document.createElement('textarea')
+      textArea.value = hex
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
     }
-  };
+  }
 
   const copyAllColors = async () => {
-    const allColors = palette.map(color => color.hex).join(', ');
-    await copyToClipboard(allColors);
-  };
+    const allColors = palette.map((color) => color.hex).join(', ')
+    await copyToClipboard(allColors)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -125,18 +151,18 @@ export default function ColorPalette() {
               Generate beautiful color palettes for your design projects
             </p>
           </CardHeader>
-          
+
           <CardContent className="space-y-4">
             <div className="flex items-center justify-center gap-4">
               <div className="flex gap-2">
                 {[3, 5, 7, 9].map((size) => (
                   <Button
                     key={size}
-                    variant={paletteSize === size ? "default" : "outline"}
+                    variant={paletteSize === size ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => {
-                      setPaletteSize(size);
-                      setPalette(generatePalette(size));
+                      setPaletteSize(size)
+                      setPalette(generatePalette(size))
                     }}
                   >
                     {size} colors
@@ -144,7 +170,7 @@ export default function ColorPalette() {
                 ))}
               </div>
             </div>
-            
+
             <div className="flex gap-2 justify-center">
               <Button onClick={regeneratePalette} className="flex items-center gap-2">
                 <RefreshCw className="h-4 w-4" />
@@ -158,19 +184,17 @@ export default function ColorPalette() {
           </CardContent>
         </Card>
 
-        <div className={cn(
-          "grid gap-4",
-          paletteSize <= 3 && "grid-cols-1 md:grid-cols-3",
-          paletteSize === 5 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-5",
-          paletteSize === 7 && "grid-cols-1 md:grid-cols-3 lg:grid-cols-7",
-          paletteSize === 9 && "grid-cols-1 md:grid-cols-3 lg:grid-cols-9"
-        )}>
+        <div
+          className={cn(
+            'grid gap-4',
+            paletteSize <= 3 && 'grid-cols-1 md:grid-cols-3',
+            paletteSize === 5 && 'grid-cols-1 md:grid-cols-2 lg:grid-cols-5',
+            paletteSize === 7 && 'grid-cols-1 md:grid-cols-3 lg:grid-cols-7',
+            paletteSize === 9 && 'grid-cols-1 md:grid-cols-3 lg:grid-cols-9'
+          )}
+        >
           {palette.map((color, index) => (
-            <ColorCard 
-              key={`${color.hex}-${index}`} 
-              color={color} 
-              onCopy={copyToClipboard}
-            />
+            <ColorCard key={`${color.hex}-${index}`} color={color} onCopy={copyToClipboard} />
           ))}
         </div>
 
@@ -197,5 +221,5 @@ export default function ColorPalette() {
         </Card>
       </div>
     </div>
-  );
-} 
+  )
+}

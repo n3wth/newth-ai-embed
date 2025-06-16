@@ -1,93 +1,93 @@
-import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Play, Pause, RotateCcw, Coffee, Zap } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useState, useEffect, useRef } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Play, Pause, RotateCcw, Coffee, Zap } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-type TimerMode = 'work' | 'break';
-type TimerStatus = 'idle' | 'running' | 'paused';
+type TimerMode = 'work' | 'break'
+type TimerStatus = 'idle' | 'running' | 'paused'
 
-const WORK_DURATION = 25 * 60; // 25 minutes in seconds
-const BREAK_DURATION = 5 * 60; // 5 minutes in seconds
+const WORK_DURATION = 25 * 60 // 25 minutes in seconds
+const BREAK_DURATION = 5 * 60 // 5 minutes in seconds
 
 export default function PomodoroTimer() {
-  const [mode, setMode] = useState<TimerMode>('work');
-  const [status, setStatus] = useState<TimerStatus>('idle');
-  const [timeLeft, setTimeLeft] = useState(WORK_DURATION);
-  const [completedSessions, setCompletedSessions] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [mode, setMode] = useState<TimerMode>('work')
+  const [status, setStatus] = useState<TimerStatus>('idle')
+  const [timeLeft, setTimeLeft] = useState(WORK_DURATION)
+  const [completedSessions, setCompletedSessions] = useState(0)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+  }
 
   const getProgress = (): number => {
-    const totalTime = mode === 'work' ? WORK_DURATION : BREAK_DURATION;
-    return ((totalTime - timeLeft) / totalTime) * 100;
-  };
+    const totalTime = mode === 'work' ? WORK_DURATION : BREAK_DURATION
+    return ((totalTime - timeLeft) / totalTime) * 100
+  }
 
   const startTimer = () => {
-    setStatus('running');
+    setStatus('running')
     intervalRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           // Timer completed
-          setStatus('idle');
+          setStatus('idle')
           if (mode === 'work') {
-            setCompletedSessions((prev) => prev + 1);
-            setMode('break');
-            setTimeLeft(BREAK_DURATION);
+            setCompletedSessions((prev) => prev + 1)
+            setMode('break')
+            setTimeLeft(BREAK_DURATION)
           } else {
-            setMode('work');
-            setTimeLeft(WORK_DURATION);
+            setMode('work')
+            setTimeLeft(WORK_DURATION)
           }
-          return mode === 'work' ? BREAK_DURATION : WORK_DURATION;
+          return mode === 'work' ? BREAK_DURATION : WORK_DURATION
         }
-        return prev - 1;
-      });
-    }, 1000);
-  };
+        return prev - 1
+      })
+    }, 1000)
+  }
 
   const pauseTimer = () => {
-    setStatus('paused');
+    setStatus('paused')
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
     }
-  };
+  }
 
   const resetTimer = () => {
-    setStatus('idle');
+    setStatus('idle')
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
     }
-    setTimeLeft(mode === 'work' ? WORK_DURATION : BREAK_DURATION);
-  };
+    setTimeLeft(mode === 'work' ? WORK_DURATION : BREAK_DURATION)
+  }
 
   const switchMode = (newMode: TimerMode) => {
-    setMode(newMode);
-    setStatus('idle');
+    setMode(newMode)
+    setStatus('idle')
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
     }
-    setTimeLeft(newMode === 'work' ? WORK_DURATION : BREAK_DURATION);
-  };
+    setTimeLeft(newMode === 'work' ? WORK_DURATION : BREAK_DURATION)
+  }
 
   useEffect(() => {
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+        clearInterval(intervalRef.current)
       }
-    };
-  }, []);
+    }
+  }, [])
 
-  const isWork = mode === 'work';
-  const progress = getProgress();
+  const isWork = mode === 'work'
+  const progress = getProgress()
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,13 +100,11 @@ export default function PomodoroTimer() {
               ) : (
                 <Coffee className="h-5 w-5 text-green-500" />
               )}
-              <CardTitle className="text-xl">
-                {isWork ? 'Focus Time' : 'Break Time'}
-              </CardTitle>
+              <CardTitle className="text-xl">{isWork ? 'Focus Time' : 'Break Time'}</CardTitle>
             </div>
             <div className="flex gap-2 justify-center">
               <Button
-                variant={isWork ? "default" : "outline"}
+                variant={isWork ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => switchMode('work')}
                 disabled={status === 'running'}
@@ -114,7 +112,7 @@ export default function PomodoroTimer() {
                 Work
               </Button>
               <Button
-                variant={!isWork ? "default" : "outline"}
+                variant={!isWork ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => switchMode('break')}
                 disabled={status === 'running'}
@@ -149,19 +147,17 @@ export default function PomodoroTimer() {
                     strokeDasharray={`${2 * Math.PI * 45}`}
                     strokeDashoffset={`${2 * Math.PI * 45 * (1 - progress / 100)}`}
                     className={cn(
-                      "transition-all duration-1000 ease-linear",
-                      isWork ? "text-orange-500" : "text-green-500"
+                      'transition-all duration-1000 ease-linear',
+                      isWork ? 'text-orange-500' : 'text-green-500'
                     )}
                     strokeLinecap="round"
                   />
                 </svg>
-                
+
                 {/* Time Display */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-4xl font-mono font-bold">
-                      {formatTime(timeLeft)}
-                    </div>
+                    <div className="text-4xl font-mono font-bold">{formatTime(timeLeft)}</div>
                     <div className="text-sm text-muted-foreground mt-1">
                       {Math.floor(progress)}% complete
                     </div>
@@ -183,7 +179,7 @@ export default function PomodoroTimer() {
                   Pause
                 </Button>
               )}
-              
+
               <Button onClick={resetTimer} variant="outline" className="flex items-center gap-2">
                 <RotateCcw className="h-4 w-4" />
                 Reset
@@ -196,24 +192,20 @@ export default function PomodoroTimer() {
                 <Badge variant="secondary" className="text-sm">
                   Sessions: {completedSessions}
                 </Badge>
-                <Badge 
-                  variant={status === 'running' ? "default" : "outline"} 
-                  className="text-sm"
-                >
+                <Badge variant={status === 'running' ? 'default' : 'outline'} className="text-sm">
                   {status === 'running' ? 'Active' : status === 'paused' ? 'Paused' : 'Ready'}
                 </Badge>
               </div>
-              
+
               <p className="text-xs text-muted-foreground">
-                {isWork 
-                  ? "Focus on your task. You've got this!" 
-                  : "Take a break. Stretch, hydrate, relax."
-                }
+                {isWork
+                  ? "Focus on your task. You've got this!"
+                  : 'Take a break. Stretch, hydrate, relax.'}
               </p>
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  );
-} 
+  )
+}

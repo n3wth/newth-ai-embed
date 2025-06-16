@@ -15,9 +15,10 @@ This is my personal collection of useful widgets that I've built for specific ne
 ## Current Widgets
 
 ### Vietnam Trip Planning
+
 - **Vietnam Weather Overview** - Complete dashboard with all three cities
 - **Hanoi Weather** - Northern Vietnam forecast
-- **Ho Chi Minh City Weather** - Southern Vietnam (Saigon) forecast  
+- **Ho Chi Minh City Weather** - Southern Vietnam (Saigon) forecast
 - **Ha Long Bay Weather** - Perfect for planning boat trips
 
 ## Embedding Widgets
@@ -47,6 +48,10 @@ Each widget can be embedded individually:
 ```bash
 # Install dependencies
 npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys if needed
 
 # Start development server
 npm run dev
@@ -85,3 +90,19 @@ src/
 ## License
 
 Personal project - feel free to explore and use for inspiration!
+
+## Development Workflow
+
+- **Format on Save**: Enabled via VSCode workspace settings and Prettier
+- **Consistent Style**: Enforced with .editorconfig
+- **Linting**: `npm run lint` (auto-fix: `npm run lint:fix`)
+- **Formatting**: `npm run format`
+- **Type Checking**: `npm run type-check`
+- **Tests**: `npm run test`, `npm run test:watch`
+- **Pre-commit Checks**: Automated with Husky and lint-staged
+
+### Recommended Extensions
+
+- Prettier
+- Tailwind CSS IntelliSense
+- TypeScript Next

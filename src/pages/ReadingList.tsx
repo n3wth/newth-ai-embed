@@ -1,44 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import React, { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PlusIcon, TrashIcon, BookIcon, CheckIcon } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PlusIcon, TrashIcon, BookIcon, CheckIcon } from 'lucide-react'
 
 interface Book {
-  id: string;
-  title: string;
-  author: string;
-  status: 'to-read' | 'reading' | 'completed';
-  notes?: string;
-  dateAdded: string;
-  dateCompleted?: string;
-  rating?: number;
+  id: string
+  title: string
+  author: string
+  status: 'to-read' | 'reading' | 'completed'
+  notes?: string
+  dateAdded: string
+  dateCompleted?: string
+  rating?: number
 }
 
 export default function ReadingList() {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [newBook, setNewBook] = useState({ title: '', author: '' });
-  const [activeTab, setActiveTab] = useState('to-read');
+  const [books, setBooks] = useState<Book[]>([])
+  const [newBook, setNewBook] = useState({ title: '', author: '' })
+  const [activeTab, setActiveTab] = useState('to-read')
 
   // Load books from localStorage
   useEffect(() => {
-    const savedBooks = localStorage.getItem('reading-list');
+    const savedBooks = localStorage.getItem('reading-list')
     if (savedBooks) {
       try {
-        setBooks(JSON.parse(savedBooks));
+        setBooks(JSON.parse(savedBooks))
       } catch (error) {
-        console.error('Error loading books:', error);
+        console.error('Error loading books:', error)
       }
     }
-  }, []);
+  }, [])
 
   // Save books to localStorage
   useEffect(() => {
-    localStorage.setItem('reading-list', JSON.stringify(books));
-  }, [books]);
+    localStorage.setItem('reading-list', JSON.stringify(books))
+  }, [books])
 
   const addBook = () => {
     if (newBook.title.trim() && newBook.author.trim()) {
@@ -47,54 +47,52 @@ export default function ReadingList() {
         title: newBook.title.trim(),
         author: newBook.author.trim(),
         status: 'to-read',
-        dateAdded: new Date().toISOString().split('T')[0]
-      };
-      setBooks([...books, book]);
-      setNewBook({ title: '', author: '' });
+        dateAdded: new Date().toISOString().split('T')[0]!,
+      }
+      setBooks([...books, book])
+      setNewBook({ title: '', author: '' })
     }
-  };
+  }
 
   const deleteBook = (id: string) => {
-    setBooks(books.filter(book => book.id !== id));
-  };
+    setBooks(books.filter((book) => book.id !== id))
+  }
 
   const updateBookStatus = (id: string, status: Book['status']) => {
-    setBooks(books.map(book => {
-      if (book.id === id) {
-        const updates: Partial<Book> = { status };
-        if (status === 'completed' && book.status !== 'completed') {
-          updates.dateCompleted = new Date().toISOString().split('T')[0];
+    setBooks(
+      books.map((book) => {
+        if (book.id === id) {
+          const updates: Partial<Book> = { status }
+          if (status === 'completed' && book.status !== 'completed') {
+            updates.dateCompleted = new Date().toISOString().split('T')[0]
+          }
+          return { ...book, ...updates }
         }
-        return { ...book, ...updates };
-      }
-      return book;
-    }));
-  };
+        return book
+      })
+    )
+  }
 
   const updateBookNotes = (id: string, notes: string) => {
-    setBooks(books.map(book => 
-      book.id === id ? { ...book, notes } : book
-    ));
-  };
+    setBooks(books.map((book) => (book.id === id ? { ...book, notes } : book)))
+  }
 
   const updateBookRating = (id: string, rating: number) => {
-    setBooks(books.map(book => 
-      book.id === id ? { ...book, rating } : book
-    ));
-  };
+    setBooks(books.map((book) => (book.id === id ? { ...book, rating } : book)))
+  }
 
   const getBooksByStatus = (status: Book['status']) => {
-    return books.filter(book => book.status === status);
-  };
+    return books.filter((book) => book.status === status)
+  }
 
   const getStats = () => {
-    const toRead = getBooksByStatus('to-read').length;
-    const reading = getBooksByStatus('reading').length;
-    const completed = getBooksByStatus('completed').length;
-    return { toRead, reading, completed, total: books.length };
-  };
+    const toRead = getBooksByStatus('to-read').length
+    const reading = getBooksByStatus('reading').length
+    const completed = getBooksByStatus('completed').length
+    return { toRead, reading, completed, total: books.length }
+  }
 
-  const stats = getStats();
+  const stats = getStats()
 
   const renderStars = (rating: number, bookId: string) => {
     return (
@@ -111,8 +109,8 @@ export default function ReadingList() {
           </button>
         ))}
       </div>
-    );
-  };
+    )
+  }
 
   const renderBookCard = (book: Book) => (
     <Card key={book.id} className="group">
@@ -151,7 +149,7 @@ export default function ReadingList() {
             <Textarea
               placeholder="Add notes about this book..."
               value={book.notes || ''}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => 
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 updateBookNotes(book.id, e.target.value)
               }
               className="min-h-[60px] text-sm"
@@ -194,7 +192,7 @@ export default function ReadingList() {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
@@ -236,19 +234,19 @@ export default function ReadingList() {
             <Input
               placeholder="Book title"
               value={newBook.title}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setNewBook({ ...newBook, title: e.target.value })
               }
             />
             <Input
               placeholder="Author name"
               value={newBook.author}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setNewBook({ ...newBook, author: e.target.value })
               }
             />
-            <Button 
-              onClick={addBook} 
+            <Button
+              onClick={addBook}
               disabled={!newBook.title.trim() || !newBook.author.trim()}
               className="gap-2"
             >
@@ -267,15 +265,9 @@ export default function ReadingList() {
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="to-read">
-                To Read ({stats.toRead})
-              </TabsTrigger>
-              <TabsTrigger value="reading">
-                Reading ({stats.reading})
-              </TabsTrigger>
-              <TabsTrigger value="completed">
-                Completed ({stats.completed})
-              </TabsTrigger>
+              <TabsTrigger value="to-read">To Read ({stats.toRead})</TabsTrigger>
+              <TabsTrigger value="reading">Reading ({stats.reading})</TabsTrigger>
+              <TabsTrigger value="completed">Completed ({stats.completed})</TabsTrigger>
             </TabsList>
 
             <TabsContent value="to-read" className="space-y-4 mt-4">
@@ -285,9 +277,7 @@ export default function ReadingList() {
                   <p>No books in your to-read list yet</p>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  {getBooksByStatus('to-read').map(renderBookCard)}
-                </div>
+                <div className="space-y-4">{getBooksByStatus('to-read').map(renderBookCard)}</div>
               )}
             </TabsContent>
 
@@ -298,9 +288,7 @@ export default function ReadingList() {
                   <p>No books currently being read</p>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  {getBooksByStatus('reading').map(renderBookCard)}
-                </div>
+                <div className="space-y-4">{getBooksByStatus('reading').map(renderBookCard)}</div>
               )}
             </TabsContent>
 
@@ -311,14 +299,12 @@ export default function ReadingList() {
                   <p>No completed books yet</p>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  {getBooksByStatus('completed').map(renderBookCard)}
-                </div>
+                <div className="space-y-4">{getBooksByStatus('completed').map(renderBookCard)}</div>
               )}
             </TabsContent>
           </Tabs>
         </CardContent>
       </Card>
     </div>
-  );
-} 
+  )
+}

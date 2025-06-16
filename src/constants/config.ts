@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://widgets.newth.ai'; 
+export const BASE_URL = 'https://widgets.newth.ai'

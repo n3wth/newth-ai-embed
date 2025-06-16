@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import WeatherVietnam from './WeatherVietnam';
-import VietnamFlights from './VietnamFlights';
-import VietnamMap from './VietnamMap';
-import VietnamItinerary from './VietnamItinerary';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import WeatherVietnam from './WeatherVietnam'
+import VietnamFlights from './VietnamFlights'
+import VietnamMap from './VietnamMap'
+import VietnamItinerary from './VietnamItinerary'
 
 export default function VietnamDashboard() {
   // Vietnam widgets available for future extensibility
@@ -15,8 +15,12 @@ export default function VietnamDashboard() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-green-800 dark:text-green-200">Vietnam Trip Dashboard</h2>
-                <p className="text-sm text-green-600 dark:text-green-400">All-in-one view: weather, flights, itinerary, and map</p>
+                <h2 className="text-2xl font-bold text-green-800 dark:text-green-200">
+                  Vietnam Trip Dashboard
+                </h2>
+                <p className="text-sm text-green-600 dark:text-green-400">
+                  All-in-one view: weather, flights, itinerary, and map
+                </p>
               </div>
             </div>
           </CardContent>
@@ -71,5 +75,5 @@ export default function VietnamDashboard() {
         </section>
       </div>
     </div>
-  );
-} 
+  )
+}
